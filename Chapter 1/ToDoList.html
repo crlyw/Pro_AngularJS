@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="todoApp">
+<head>
+    <title>TO DO LIST</title>
+    <link href="../bootstrap-3.3.6-dist/css/bootstrap.css" rel="stylesheet"/>
+    <link href="../bootstrap-3.3.6-dist/css/bootstrap-theme.css" rel="stylesheet"/>
+    <script src="../angular-1.4.9/angular.js"></script>
+    <script>
+        var model = {
+            user: "Adam",
+            items: [
+                     { action: "Buy Flowers", done: false },
+                     { action: "Get Shoes", done: false },
+                      { action: "Collect Tickets", done: false },
+                     { action: "Call Joe", done: false }
+            ]
+        };
+
+        var todoApp = angular.module("todoApp", []);
+        todoApp.controller("ToDoCtrl", function ($scope) {
+            $scope.todo = model;
+        });
+    </script>
+</head>
+<body ng-controller="TodoCtrl">
+    <div class="page-header">
+        <h1>To Do List</h1>
+    </div>
+    <div class="panel">
+        <div class="input-group">
+            <input class="form-control"/>
+            <span class="input-group-btn">
+                <button class="btn btn-default">Add</button>
+            </span>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Done</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</body>
+</html>
