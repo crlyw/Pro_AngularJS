@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="sportsStore">
+<head>
+    <title>SportsStore</title>
+    <script src="../angular-1.4.9/angular.js"></script>
+    <link href="../bootstrap-3.3.6-dist/css/bootstrap.css" rel="stylesheet"/>
+    <link href="../bootstrap-3.3.6-dist/css/bootstrap-theme.css" rel="stylesheet"/>
+    <script>
+        angular.module("sportsStore",[]);
+    </script>
+    <script src="controllers/sportsStore.js"></script>
+    <script src="filters/customFilters.js"></script>
+</head>
+<body ng-controller="sportsStoreCtrl">
+    <div class="navbar navbar-inverse">
+        <a class="navbar-brand" href="#">SPORTS STORE</a>
+    </div>
+    <div class="panel panel-default row">
+        <div class="col-xs-3">
+            Categories go here
+        </div>
+        <div class="col-xs-8">
+            <div class="well" ng-repeat="item in data.products">
+                <h3>
+                    <strong>{{item.name}}</strong>
+                    <span class="pull-right label label-primary">
+                        {{item.price | currency}}
+                    </span>
+                </h3>
+                <span class="lead">{{item.description}}</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
