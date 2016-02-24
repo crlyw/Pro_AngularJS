@@ -6,17 +6,51 @@
     <link href="../bootstrap-3.3.6-dist/css/bootstrap.css" rel="stylesheet"/>
     <link href="../bootstrap-3.3.6-dist/css/bootstrap-theme.css" rel="stylesheet"/>
     <script>
-        angular.module("sportsStore",["customFilters"]);
+        angular.module("sportsStore",["customFilters","cart","ngRoute"])
+        .config(function($routeProvider){
+            
+            $routeProvider.when("/complete",{
+                templateUrl:"/Chapter6/views/thankYou.html"
+            })
+            
+            $routeProvider.when("/placeorder",{
+                templateUrl:"/Chapter6/views/placeOrder.html"
+            })
+            
+            $routeProvider.when("/checkout",{
+                templateUrl:"/Chapter6/views/checkoutSummary.html"
+            });
+            
+            $routeProvider.when("/products",{
+                templateUrl:"/Chapter6/views/productList.html"
+            });
+            
+            $routeProvider.otherwise({
+                templateUrl:"/Chapter6/views/productList.html"
+            })
+        });
     </script>
     <script src="controllers/sportsStore.js"></script>
     <script src="filters/customFilters.js"></script>
     <script src="controllers/productListControllers.js"></script>
+    <script src="components/cart/cart.js"></script>
+    <script src="../angular-1.4.9/angular-route.js"></script>
+    <script src="controllers/checkoutController.js"></script>
 </head>
 <body ng-controller="sportsStoreCtrl">
     <div class="navbar navbar-inverse">
         <a class="navbar-brand" href="#">SPORTS STORE</a>
+        <cart-summary/>
     </div>
-    <div class="panel panel-default row" ng-controller="productListCtrl">
+    
+    <!-- error handling -->
+    <div class="alert alert-danger" ng-show="data.error">
+        Error {{data.error.status}}. The product data was not loaded.
+        <a href="/Chapter6/app.html" class="alert-link">Click here to try again</a>
+    </div>
+    
+    <!--
+    <div class="panel panel-default row" ng-controller="productListCtrl" ng-hide="data.error">
         <div class="col-xs-3">                                                                                                        
             <a ng-click="selectCategory()"
                class="btn btn-block btn-default btn-lg">Home</a>
@@ -45,5 +79,12 @@
             </div>
         </div>
     </div>
+    -->
+    
+    <!--
+    <ng-include src="'views/productList.html'"></ng-include>
+    -->
+    
+    <ng-view/>
 </body>
 </html>

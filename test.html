@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>A Canvas</title>
+</head>
+<body>
+    <canvas id="canvas" width="300" height="300" style="border:1px solid #d3d3d3;">
+        Your browser does not support the HTML5 canvas tag.</canvas>
+</body>
+<script type="application/javascript">
+    var canvas=document.getElementById("canvas");
+    var ctx=canvas.getContext("2d");
+    ctx.fillStyle="blue";
+    ctx.fillRect(50,50,100,100);
+</script>
+</html>
