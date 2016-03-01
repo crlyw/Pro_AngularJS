@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+<head>
+    <title>Directives</title>
+    <script src="../angular-1.4.9/angular.js"></script>
+    <link href="../bootstrap-3.3.6-dist/css/bootstrap.css" rel="stylesheet"/>
+    <link href="../bootstrap-3.3.6-dist/css/bootstrap-theme.css" rel="stylesheet"/>
+    <script>
+        angular.module("exampleApp", [])
+            .controller("defaultCtrl", function($scope){
+            $scope.todos = [
+                        {action:"Get groceries", complete:false},
+                        {action:"Call plumber", complete:false},
+                        {action:"Buy running shoes", complete:true},
+                        {action:"Buy flowers", complete:false},
+                        {action:"Call family", complete:false},
+            ];
+            
+            $scope.buttonNames = ["Red", "Green", "Blue"];
+            
+            $scope.data={
+                rowColor:"Blue",
+                columnColor:"Green"
+            }
+            
+            $scope.handleEvent = function(e){
+                console.log("Event type: " + e.type);
+                $scope.data.columnColor = e.type == "mouseover" ? "Green" : "Blue";
+            }
+            /*
+            $scope.settings = {
+                Rows: "Red",
+                Columns: "Green"
+            };
+            */
+        });
+    </script>
+    <style>
+        /*td > * : first-child{font-weight:bold;}*/
+        .Red{background-color: lightcoral;}
+        .Green{background-color: lightgreen;}
+        .Blue{background-color: lightblue;}
+    </style>
+</head>
+<body>
+    <div id="todoPanel" class="panel" ng-controller="defaultCtrl">
+        
+        <h3 class="panel-header">To Do List</h3>
+        
+        <div class="well">
+            <span ng-repeat="button in buttonNames">
+                <button class="btn btn-info" ng-click="data.rowColor = button">
+                    {{button}}
+                </button>
+            </span>
+        </div>
+        
+        <table class="table">
+            <thead>
+                <tr><th>#</th><th>Action</th><th>Done</th></tr>
+            </thead>
+            <tr ng-repeat="item in todos" ng-class="data.rowColor"
+                ng-mouseenter="handleEvent($event)" 
+                ng-mouseleave="handleEvent($event)">
+                <td>{{$index+1}}</td>
+                <td>{{item.action}}</td>
+                <td ng-class="data.columnColor">{{item.complete}}</td>
+            </tr>
+        </table>
+        <!--
+        <div class="row well">
+            <div class="col-xs-6" ng-repeat="(key, val) in settings">
+                <h4>{{key}}</h4>
+                <div class="radio" ng-repeat="button in buttonNames">
+                    <label>
+                        <input type="radio" ng-model="settings[key]" value="{{button}}">{{button}}
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th><th>Action</th><th>Done</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in todos" ng-class="settings.Rows">
+                    <td>{{$index+1}}</td>
+                    <td>{{item.action}}</td>
+                    <td ng-style="{'background-color':settings.Columns}">
+                        {{item.complete}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        -->
+    </div>
+</body>
+</html>
