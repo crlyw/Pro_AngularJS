@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+<head>
+    <title>Directives</title>
+    <script src="../angular-1.4.9/angular.js"></script>
+    <link href="../bootstrap-3.3.6-dist/css/bootstrap.css" rel="stylesheet"/>
+    <link href="../bootstrap-3.3.6-dist/css/bootstrap-theme.css" rel="stylesheet"/>
+    <script>
+        angular.module("exampleApp", [])
+            .directive("demoDirective", function(){
+                return function(scope, element, attrs){
+                    var items = element.find("li");
+                    
+                    items.css("color","red");
+                    
+                    for(var i=0; i<items.length; i++){
+                        if(items.eq(i).text() == "Oranges"){
+                            items.eq(i).css("font-weight","bold");
+                        }else{
+                            items.eq(i).css("font-weight","normal");
+                        }
+                    }
+                    console.log("Element count: " + items.length);
+                    console.log("Font: " + items.css("font-weight"));
+                }
+            })
+            .controller("defaultCtrl", function($scope){
+                //controller defines no data or behaviors
+            });
+    </script>
+</head>
+<body ng-controller="defaultCtrl">
+    <h3>Fruit</h3>
+    <ol demo-directive>
+        <li>Apples</li>
+        <ul>
+            <li>Bananas</li>
+            <li>Cherries</li>
+            <li>Oranges</li>
+        </ul>
+        <li>Oranges</li>
+        <li>Pears</li>
+    </ol>
+</body>
+</html>
