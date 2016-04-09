@@ -8,10 +8,14 @@ angular.module("exampleApp", ["increment", "ngResource", "ngRoute"])
             templateUrl: "/Chapter22/tableView.html"
         });
         
-        $routeProvider.when("/edit",{
+        $routeProvider.when("/edit/:id",{
             templateUrl: "/Chapter22/editorView.html"
         });
         
+        $routeProvider.when("/edit/:id/:data*", {
+            templateUrl: "/Chapter22/editorView.html" 
+        });
+    
         $routeProvider.when("/create", {
             templateUrl: "/Chapter22/editorView.html" 
         });
@@ -20,10 +24,22 @@ angular.module("exampleApp", ["increment", "ngResource", "ngRoute"])
             templateUrl: "/Chapter22/tableView.html" 
         });
     })
-    .controller("defaultCtrl", function($scope, $http, $resource, $location, baseUrl){
+    .controller("defaultCtrl", function($scope, $http, $resource, $location, $route, $routeParams, baseUrl){
         
         //$scope.displayMode = "list";
         $scope.currentProduct = null;
+    
+        $scope.$on("$routeChangeSuccess", function(){
+            if($location.path().indexOf("/edit/") > -1){
+                var id = $routeParams["id"];
+                for(var i=0; i<$scope.products.length; i++){
+                    if($scope.products[i].id == id){
+                        $scope.currentProduct = $scope.products[i];
+                        break;
+                    }
+                }
+            } 
+        });
     
         $scope.productsResource = $resource(baseUrl + ":id", {id: "@id"});
         

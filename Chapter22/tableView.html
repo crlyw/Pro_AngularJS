@@ -15,7 +15,10 @@
                 <td class="text-right">{{item.price | currency}}</td>
                 <td class="text-center">
                     <button class="btn btn-xs btn-primary" ng-click="deleteProduct(item)">Delete</button>
-                    <button class="btn btn-xs btn-primary" ng-click="editProduct(item)">Edit</button>
+                    <!--
+                        <button class="btn btn-xs btn-primary" ng-click="editProduct(item)">Edit</button>
+                    -->
+                    <a href="/Chapter22/edit/{{item.id}}" class="btn btn-xs btn-primary">Edit</a>
                     <increment value="item.price"/>
                 </td>
             </tr>
